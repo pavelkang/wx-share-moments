@@ -1,6 +1,7 @@
 angular.module('pavelkang.wx-share-moments', []).
 	directive('wxShareMoments', function(){
 		var link = function(scope, element, attrs) {
+			alert(attrs['link'])
 			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady(){
 				WeixinJSBridge.on('menu:share:timeline', function(argv){
 					WeixinJSBridge.invoke('shareTimeline', {
@@ -10,8 +11,8 @@ angular.module('pavelkang.wx-share-moments', []).
 						"link" : attrs['link'],
 						"title" : attrs['title']
 					}, function(res) {
-						_report('send_msg', res.err_msg);
-					})
+						_report('timeline', res.err_msg);
+					});
 				});
 			}, false);
 		};
